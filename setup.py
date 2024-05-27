@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 import os
 
 with open('requirements.txt') as f:
@@ -10,7 +10,7 @@ setup(
     description='Podcastle castle-ai google pubsub interface',
     long_description='This package created for working and interacting with google pubsub services using'
                      'Google Cloud Pub/Sub.',
-    packages=[''],  # Todo: fill
+    packages=find_packages(),
     author="Artyom Kosakyan",
     author_email="artyom@podcastle.ai",
     install_requires=required,
