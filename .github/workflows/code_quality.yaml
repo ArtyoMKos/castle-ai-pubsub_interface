@@ -1,0 +1,36 @@
+name: Code quality
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12.3"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Analysing the code with pylint
+      run: |
+        pylint $(git ls-files '*.py')
+    - name: Analysing the code with mypy
+      run: |
+        mypy $(git ls-files '*.py')
+      continue-on-error: true
+    - name: Analysing the code with black
+      run: black --diff --check $(git ls-files '*.py')
+    - name: Check coverage
+      run: |
+        coverage run -m pytest
+        coverage report --fail-under=70
+        if: failure()
+        run: echo "::warning file=coverage.xml::Test coverage is below 70%!"
+      continue-on-error: true
