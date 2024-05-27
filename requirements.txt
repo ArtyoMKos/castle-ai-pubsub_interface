@@ -1,0 +1,9 @@
+google-cloud-core==2.4.1
+google-cloud-storage==2.16.0
+pylint==3.1.0
+mypy==1.10.0
+black==24.4.2
+pytest==8.2.0
+backoff==2.2.1
+google-cloud-pubsub==2.21.1
+coverage==7.5.1

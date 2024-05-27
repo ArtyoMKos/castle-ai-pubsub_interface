@@ -1,6 +1,9 @@
 from setuptools import setup
 import os
 
+with open('requirements.txt') as f:
+    required = f.read().splitlines()
+
 setup(
     name='pubsub_interface',
     version=os.getenv('CI_COMMIT_TAG', '0.0.1').removeprefix("v"),
@@ -10,9 +13,7 @@ setup(
     packages=[''],  # Todo: fill
     author="Artyom Kosakyan",
     author_email="artyom@podcastle.ai",
-    install_requires=[
-
-    ],
+    install_requires=required,
     license="MIT",
     python_requires='>=3.6',
     classifiers=[
